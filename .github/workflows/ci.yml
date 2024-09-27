@@ -1,5 +1,3 @@
-# based on https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
 name: Run tests in Answers
 
 on:
@@ -10,14 +8,11 @@ on:
   pull_request:
 
 concurrency:
-  # For pull requests, cancel all currently-running jobs for this workflow
-  # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#concurrency
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
 
 jobs:
-  build_day1:
-
+  build_day1:  # Renamed to be unique
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -49,8 +44,7 @@ jobs:
         working-directory: ./csharp/SdetBootcampDay1
         run: dotnet test --framework ${{ matrix.framework }} --no-restore --no-build --verbosity normal --filter Name~Answers
 
-   build_day2:
-
+  build_day2:  # Renamed to be unique
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -78,6 +72,6 @@ jobs:
         working-directory: ./csharp/SdetBootcampDay2
         run: dotnet build --framework ${{ matrix.framework }} --no-restore
 
-      - name: Run tests from day 1
+      - name: Run tests from day 2  # Modified name for clarity
         working-directory: ./csharp/SdetBootcampDay2
         run: dotnet test --framework ${{ matrix.framework }} --no-restore --no-build --verbosity normal --filter Name~Answers
