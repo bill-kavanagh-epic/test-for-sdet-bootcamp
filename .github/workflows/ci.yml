@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build_day1:  # Renamed to be unique
+  build_day1:  
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -44,7 +44,7 @@ jobs:
         working-directory: ./csharp/SdetBootcampDay1
         run: dotnet test --framework ${{ matrix.framework }} --no-restore --no-build --verbosity normal --filter Name~Answers
 
-  build_day2:  # Renamed to be unique
+  build_day2:  
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -72,6 +72,6 @@ jobs:
         working-directory: ./csharp/SdetBootcampDay2
         run: dotnet build --framework ${{ matrix.framework }} --no-restore
 
-      - name: Run tests from day 2  # Modified name for clarity
+      - name: Run tests from day 2 
         working-directory: ./csharp/SdetBootcampDay2
         run: dotnet test --framework ${{ matrix.framework }} --no-restore --no-build --verbosity normal --filter Name~Answers
